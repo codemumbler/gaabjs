@@ -10,4 +10,25 @@ describe('AB Testing', function() {
 			expect(expected.ab({})).toEqual(expected);
 		});
 	});
+
+	describe('AB set experiments', function() {
+		var testElement;
+		beforeEach(function(){
+			$(document.body).append("<div class='test-ab-element'></div>");
+			testElement = $('.test-ab-element');
+		});
+
+		afterEach(function(){
+			$('.test-ab-element').remove();
+		});
+
+		it('define text alternatives', function() {
+			testElement.ab({
+				'experiments':[{
+					'value': 'experiment A'
+				}]
+			});
+			expect(testElement.text()).toBe('experiment A');
+		});
+	});
 });
