@@ -12,10 +12,14 @@ describe('AB Testing', function() {
 	});
 
 	describe('AB set experiments', function() {
-		var testElement;
+		var testElement, randomValue;
 		beforeEach(function(){
-			$(document.body).append("<div class='test-ab-element'></div>");
+			$(document.body).append("<div class='test-ab-element'/>");
 			testElement = $('.test-ab-element');
+			Math.random = function() {
+				return randomValue();
+			};
+			randomValue = function(){ return 0 };
 		});
 
 		afterEach(function(){
@@ -29,6 +33,29 @@ describe('AB Testing', function() {
 				}]
 			});
 			expect(testElement.text()).toBe('experiment A');
+		});
+
+		it('define 2 text alternatives - pick A', function() {
+			testElement.ab({
+				'experiments':[{
+					'value': 'experiment A'
+				},{
+					'value': 'experiment B'
+				}]
+			});
+			expect(testElement.text()).toBe('experiment A');
+		});
+
+		it('define 2 text alternatives - pick B', function() {
+			randomValue = function(){ return 0.9 };
+			testElement.ab({
+				'experiments':[{
+					'value': 'experiment A'
+				},{
+					'value': 'experiment B'
+				}]
+			});
+			expect(testElement.text()).toBe('experiment B');
 		});
 	});
 });
