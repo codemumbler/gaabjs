@@ -58,4 +58,35 @@ describe('AB Testing', function() {
 			expect(testElement.text()).toBe('experiment B');
 		});
 	});
+
+	describe('Experiment survives refresh via cookie', function() {
+		var testElement;
+		function setCookie(cname, cvalue, exdays) {
+			var d = new Date();
+			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+			var expires = "expires="+d.toUTCString();
+			document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+		beforeEach(function(){
+			$(document.body).append("<div class='test-ab-element'/>");
+			testElement = $('.test-ab-element');
+			setCookie('codemumblerAB_index', '0', 1);
+		});
+
+		afterEach(function(){
+			$('.test-ab-element').remove();
+			setCookie('codemumblerAB_index', '0', 0);
+		});
+
+		it('Uses cookie value', function() {
+			testElement.ab({
+				'experiments':[{
+					'value': 'experiment A'
+				},{
+					'value': 'experiment B'
+				}]
+			});
+			expect(testElement.text()).toBe('experiment A');
+		});
+	});
 });
