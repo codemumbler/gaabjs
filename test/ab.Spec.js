@@ -7,7 +7,7 @@ describe('AB Testing', function() {
 
 		it('ensure chaining possible', function(){
 			var expected = $(document.body);
-			expect(expected.ab({})).toEqual(expected);
+			expect(expected.ab({}).is('body')).toEqual(true);
 		});
 	});
 
