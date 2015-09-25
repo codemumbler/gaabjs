@@ -37,7 +37,12 @@
 	};
 
 	var renderExperiment = function(index) {
-		$this.text(experiments[index].value);
+		var experiment = experiments[index].value;
+		if (typeof experiment === 'string') {
+			$this.text(experiment);
+		} else {
+			experiment($this);
+		}
 		setCookie(COOKIE_NAME, index, 1);
 	};
 

@@ -25,7 +25,7 @@ describe('AB Testing', function() {
 	});
 
 	describe('AB set experiments', function() {
-		it('define text alternatives', function() {
+		it('define text experiments', function() {
 			testElement.ab({
 				'experiments':[{
 					'value': 'experiment A'
@@ -34,7 +34,7 @@ describe('AB Testing', function() {
 			expect(testElement.text()).toBe('experiment A');
 		});
 
-		it('define 2 text alternatives - pick A', function() {
+		it('define 2 text experiments - pick A', function() {
 			testElement.ab({
 				'experiments':[{
 					'value': 'experiment A'
@@ -45,7 +45,7 @@ describe('AB Testing', function() {
 			expect(testElement.text()).toBe('experiment A');
 		});
 
-		it('define 2 text alternatives - pick B', function() {
+		it('define 2 text experiments - pick B', function() {
 			Math.random = function() {
 				return 0.9;
 			};
@@ -57,6 +57,17 @@ describe('AB Testing', function() {
 				}]
 			});
 			expect(testElement.text()).toBe('experiment B');
+		});
+
+		it('experiment is a function', function() {
+			testElement.ab({
+				'experiments':[{
+					'value': function(element) {
+						$(element).addClass('experimentA');
+					}
+				}]
+			});
+			expect(testElement.hasClass('experimentA')).toBe(true);
 		});
 	});
 
