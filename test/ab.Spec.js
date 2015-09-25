@@ -1,7 +1,16 @@
 describe('AB Testing', function() {
+	var testElement;
+	beforeEach(function(){
+		$(document.body).append('<div class="test-ab-element"/>');
+		testElement = $('.test-ab-element');
+		Math.random = function() {
+			return 0;
+		};
+	});
 
 	afterEach(function() {
-		document.cookie = "codemumblerAB_index=;";
+		$('.test-ab-element').remove();
+		document.cookie = 'codemumblerAB_index=;';
 	});
 
 	describe('AB plugin', function() {
@@ -16,19 +25,6 @@ describe('AB Testing', function() {
 	});
 
 	describe('AB set experiments', function() {
-		var testElement, randomValue;
-		beforeEach(function(){
-			$(document.body).append("<div class='test-ab-element'/>");
-			testElement = $('.test-ab-element');
-			Math.random = function() {
-				return 0;
-			};
-		});
-
-		afterEach(function(){
-			$('.test-ab-element').remove();
-		});
-
 		it('define text alternatives', function() {
 			testElement.ab({
 				'experiments':[{
@@ -65,7 +61,6 @@ describe('AB Testing', function() {
 	});
 
 	describe('Cookie tests - ', function() {
-		var testElement;
 		function readCookie(cname) {
 			var name = cname + "=";
 			var ca = document.cookie.split(';');
@@ -84,20 +79,7 @@ describe('AB Testing', function() {
 			document.cookie = cname + "=" + cvalue + "; " + expires;
 		};
 
-		beforeEach(function(){
-			$(document.body).append("<div class='test-ab-element'/>");
-			testElement = $('.test-ab-element');
-		});
-
-		afterEach(function(){
-			$('.test-ab-element').remove();
-		});
-
 		describe('Experiment survives refresh via cookie', function() {
-			beforeEach(function(){
-				setCookie('codemumblerAB_index', '0', 1);
-			});
-
 			it('Uses cookie value', function() {
 				testElement.ab({
 					'experiments':[{
@@ -108,9 +90,7 @@ describe('AB Testing', function() {
 				});
 				expect(testElement.text()).toBe('experiment A');
 			});
-		});
 
-		describe('Saves experiment index', function() {
 			it('Creates cookie', function() {
 				Math.random = function() {
 					return 0.9;
