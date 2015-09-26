@@ -144,7 +144,24 @@ describe('AB Testing', function() {
 					'value': 'experiment A'
 				}]
 			});
-			expect().toBe('experiment A');
+		});
+
+		it('no GA available', function(){
+			var tempGA = window['ga'];
+			window['ga'] = undefined;
+			try {
+				testElement.ab({
+					'category': 'text change',
+					'action': 'experiment',
+					'experiments':[{
+						'label': 'A',
+						'value': 'experiment A'
+					}]
+				});
+			} catch (e) {
+				fail('Should be no error');
+			}
+			window['ga'] = tempGA;
 		});
 	});
 });

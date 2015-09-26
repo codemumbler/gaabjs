@@ -47,7 +47,8 @@
 	};
 
 	var tracking = function(options, index) {
-		ga('send', 'event', options.category, options.action, experiments[index].label);
+		if (typeof ga !== 'undefined')
+			ga('send', 'event', options.category, options.action, experiments[index].label);
 	};
 
 	$.fn.ab = function(options) {
