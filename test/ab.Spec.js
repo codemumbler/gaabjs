@@ -117,4 +117,34 @@ describe('AB Testing', function() {
 			});
 		});
 	});
+
+	describe('async tests', function() {
+		var originalTimeout, originalAjax;
+		beforeEach(function() {
+			originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+			jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
+		});
+
+		afterEach(function() {
+			jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+		});
+
+		it('fires GA event', function(done) {
+			$(document.body).on('ga', function gaCallback(event, operation, type, category, action, label) {
+				var gaArgs = [ operation, type, category, action, label ];
+				expect(gaArgs.join(',')).toEqual('send,event,text change,experiment,A');
+				done();
+				$(document.body).off('ga', gaCallback);
+			});
+			testElement.ab({
+				'category': 'text change',
+				'action': 'experiment',
+				'experiments':[{
+					'label': 'A',
+					'value': 'experiment A'
+				}]
+			});
+			expect().toBe('experiment A');
+		});
+	});
 });

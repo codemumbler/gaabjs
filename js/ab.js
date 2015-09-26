@@ -46,12 +46,17 @@
 		setCookie(COOKIE_NAME, index, 1);
 	};
 
+	var tracking = function(options, index) {
+		ga('send', 'event', options.category, options.action, experiments[index].label);
+	};
+
 	$.fn.ab = function(options) {
 		$this = $(this);
 		if (!options || !options.experiments)
 			return $this;
 		experiments = options.experiments;
 		renderExperiment(getIndex());
+		tracking(options, getIndex());
 		return $this;
 	};
 })(window['jQuery']);
