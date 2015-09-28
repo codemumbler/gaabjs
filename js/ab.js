@@ -27,11 +27,18 @@
 
 	var getIndex = function() {
 		var index = 0;
-		var savedIndex = readCookie(COOKIE_NAME);
-		if (savedIndex !== null && savedIndex < experiments.length) {
-			index = savedIndex;
+		if (window.location.href.indexOf('?ab')) {
+			if (window.location.href.indexOf("?ab=") == -1)
+				index = Math.floor(Math.random() * experiments.length);
+			else
+				index = window.location.href.substring(window.location.href.indexOf("?ab=")+4);
 		} else {
-			index = Math.floor(Math.random() * experiments.length);
+			var savedIndex = readCookie(COOKIE_NAME);
+			if (savedIndex !== null && savedIndex < experiments.length) {
+				index = savedIndex;
+			} else {
+				index = Math.floor(Math.random() * experiments.length);
+			}
 		}
 		return index;
 	};

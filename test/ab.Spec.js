@@ -69,6 +69,22 @@ describe('AB Testing', function() {
 			});
 			expect(testElement.hasClass('experimentA')).toBe(true);
 		});
+
+		it('query parameter force selection', function() {
+			window.location.href += "#?ab=0";
+			Math.random = function() {
+				return 0.9;
+			};
+			testElement.ab({
+				'experiments':[{
+					'value': 'experiment A'
+				},{
+					'value': 'experiment B'
+				}]
+			});
+			expect(testElement.text()).toBe('experiment A');
+			window.location.href = window.location.href.replace('#?ab=0','#');
+		});
 	});
 
 	describe('Cookie tests - ', function() {
@@ -161,6 +177,7 @@ describe('AB Testing', function() {
 			} catch (e) {
 				fail('Should be no error');
 			}
+			expect(true).toBe(true);
 			window['ga'] = tempGA;
 		});
 	});
