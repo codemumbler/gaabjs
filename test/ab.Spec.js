@@ -85,6 +85,22 @@ describe('AB Testing', function() {
 			expect(testElement.text()).toBe('experiment A');
 			window.location.href = window.location.href.replace('#?ab=0','#');
 		});
+
+		it('empty query parameter force random selection', function() {
+			window.location.href += "#?ab";
+			Math.random = function() {
+				return 0.9;
+			};
+			testElement.ab({
+				'experiments':[{
+					'value': 'experiment A'
+				},{
+					'value': 'experiment B'
+				}]
+			});
+			expect(testElement.text()).toBe('experiment B');
+			window.location.href = window.location.href.replace('#?ab','#');
+		});
 	});
 
 	describe('Cookie tests - ', function() {
