@@ -13,13 +13,16 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Gaabjs by codemumbler</title>
+    <script src="javascripts/jquery-1.11.3.min.js"></script>
+    <script src="javascripts/ab.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <title>Gaab.js</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Gaabjs</h1>
+        <h1>Gaab.js</h1>
         <h2>An A/B Testing JavaScript library with easy Google Analytics integration.</h2>
         <a href="https://github.com/codemumbler/gaabjs" class="button"><small>View project on</small> GitHub</a>
       </div>
@@ -29,9 +32,22 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="gaabjs" class="anchor" href="#gaabjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>gaabjs</h1>
+<a id="gaabjs" class="anchor" href="#gaabjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>gaab.js</h1>
 
 <p>An A/B Testing JavaScript library with easy Google Analytics integration.</p>
+<div id="test"></div>
+<pre>
+  &lt;div id="test"&gt;&lt;/div&gt;
+  &lt;script&gt;
+  $("#test").ab({
+    'experiments':[{
+      'value': 'This is how easy-to-use it is.'
+    },{
+      'value': 'How easy-to-use is it?  This easy.'
+    }]
+  });
+  &lt;/script&gt;
+</pre>
         </section>
 
         <aside id="sidebar">
