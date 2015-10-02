@@ -6,4 +6,16 @@ $(document).ready(function(){
 			'value': 'How easy-to-use is it?  This easy.'
 		}]
 	});
+
+	$('button.download-now').ab({
+    'experiments':[{
+      'value': function(element) {
+        $(element).removeClass('btn-success').addClass('btn-primary');
+      }
+    },{
+      'value': function(element) {
+        $(element).text($(element).text() + '!');
+      }
+    }]
+  });
 });

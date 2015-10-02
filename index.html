@@ -7,6 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
     <!--[if lt IE 9]>
@@ -48,6 +49,50 @@
   });
   &lt;/script&gt;
 </pre>
+<p>The choosen experiment survives page refreshes by creating a cookie.</p>
+<h3>GA Events</h3>
+<p>Gaab.js can fire GA Events to record the experiments choosen. Ensure that you have initialized Google Analytics first then call:</p>
+<pre>
+  &lt;script&gt;
+  $("#test").ab({
+    'category': 'Introduction Text',
+    'action': 'Gaab.js',
+    'experiments':[{
+      'label': 'experiment 1',
+      'value': 'This is how easy-to-use it is.'
+    },{
+      'label': 'experiment 2',
+      'value': 'How easy-to-use is it?  This easy.'
+    }]
+  });
+  &lt;/script&gt;
+</pre>
+
+<h3>Testing</h3>
+<ul>
+<li>Force a new random selection by adding <a href="#?ab">?ab</a> to the URL</li>
+<li>Choose a specifc experiment to render by specifying the index <a href="#?ab=1">?ab=1</a></li>
+</ul>
+
+<h3>More than text</h3>
+<p>You can experiment with more than text!</p>
+<pre>
+  &lt;button class="btn btn-success download-now"&gt;Download now&lt;/button&gt;
+  &lt;script&gt;
+  $('button.download-now').ab({
+    'experiments':[{
+      'value': function(element) {
+        $(element).removeClass('btn-success').addClass('btn-primary');
+      }
+    },{
+      'value': function(element) {
+        $(element).text($(element).text() + '!');
+      }
+    }]
+  });
+  &lt;/script&gt;
+</pre>
+<button type="button" class="btn btn-success download-now">Download now</button>
         </section>
 
         <aside id="sidebar">
