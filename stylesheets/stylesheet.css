@@ -46,6 +46,9 @@ summary {
   display: block;
 }
 
+* {
+  box-sizing: inherit;
+}
 /**
  * 1. Correct `inline-block` display not defined in IE 8/9.
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
@@ -878,4 +881,3 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
-
