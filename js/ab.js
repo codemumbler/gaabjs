@@ -27,7 +27,7 @@
 
 	var getIndex = function() {
 		var index = 0;
-		if (window.location.href.indexOf('?ab')) {
+		if (window.location.href.indexOf('?ab') !== -1) {
 			if (window.location.href.indexOf("?ab=") == -1)
 				index = Math.floor(Math.random() * experiments.length);
 			else
