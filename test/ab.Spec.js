@@ -147,6 +147,68 @@ describe('AB Testing', function() {
 				});
 				expect(readCookie('codemumblerAB_index')).toBe('1');
 			});
+
+			it('named experiments in cookie value', function(){
+				Math.random = function() {
+					return 0;
+				};
+				testElement.ab({
+					'name': 'experiment1',
+					'experiments':[{
+						'value': 'experiment 1A'
+					},{
+						'value': 'experiment 1B'
+					}]
+				});
+				expect(readCookie('codemumblerAB_index')).toBe('experiment1=0');
+			});
+
+			it('2 experiments on the same page', function() {
+				Math.random = function() {
+					return 0;
+				};
+				testElement.ab({
+					'name': 'experiment1',
+					'experiments':[{
+						'value': 'experiment 1A'
+					},{
+						'value': 'experiment 1B'
+					}]
+				});
+				Math.random = function() {
+					return 0.9;
+				};
+				testElement.ab({
+					'name': 'experiment2',
+					'experiments':[{
+						'value': 'experiment 2A'
+					},{
+						'value': 'experiment 2B'
+					}]
+				});
+				expect(readCookie('codemumblerAB_index')).toBe('experiment1=0,experiment2=1');
+			});
+
+			it('2 experiments on the same page', function() {
+				setCookie('codemumblerAB_index', 'experiment1=0,experiment2=1', 1);
+				testElement.ab({
+					'name': 'experiment1',
+					'experiments':[{
+						'value': 'experiment 1A'
+					},{
+						'value': 'experiment 1B'
+					}]
+				});
+				testElement.ab({
+					'name': 'experiment2',
+					'experiments':[{
+						'value': 'experiment 2A'
+					},{
+						'value': 'experiment 2B'
+					}]
+				});
+				expect(testElement.text()).toBe('experiment 2B');
+			});
 		});
 	});
 
