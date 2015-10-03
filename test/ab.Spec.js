@@ -189,7 +189,20 @@ describe('AB Testing', function() {
 				expect(readCookie('codemumblerAB_index')).toBe('experiment1=0,experiment2=1');
 			});
 
-			it('2 experiments on the same page', function() {
+			it('named experiment load from cookie', function() {
+				setCookie('codemumblerAB_index', 'experiment1=0', 1);
+				testElement.ab({
+					'name': 'experiment1',
+					'experiments':[{
+						'value': 'experiment 1A'
+					},{
+						'value': 'experiment 1B'
+					}]
+				});
+				expect(testElement.text()).toBe('experiment 1A');
+			});
+
+			it('2 experiments load from cookie on the same page', function() {
 				setCookie('codemumblerAB_index', 'experiment1=0,experiment2=1', 1);
 				testElement.ab({
 					'name': 'experiment1',

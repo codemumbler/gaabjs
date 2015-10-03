@@ -5,6 +5,7 @@
 	var COOKIE_NAME = 'codemumblerAB_index';
 
 	function readCookie(cname) {
+		var cookieName = cname + '=';
 		var ca = document.cookie.split(';');
 		for(var i=0; i<ca.length; i++) {
 			var c = ca[i];
@@ -35,6 +36,13 @@
 				index = window.location.href.substring(window.location.href.indexOf("?ab=")+4);
 		} else {
 			var savedIndex = readCookie(COOKIE_NAME);
+			if (name && savedIndex != null) {
+				var nameList = savedIndex.split(',');
+				for (var i = 0; i<nameList.length; i++){
+					if (nameList[i].indexOf(name) > -1)
+						savedIndex = nameList[i].split('=')[1];
+				}
+			}
 			if (savedIndex !== null && savedIndex < experiments.length) {
 				index = savedIndex;
 			} else {
