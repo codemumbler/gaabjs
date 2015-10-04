@@ -41,6 +41,7 @@
   &lt;div id="test"&gt;&lt;/div&gt;
   &lt;script&gt;
   $("#test").ab({
+    'name': 'intro-text',
     'experiments':[{
       'value': 'This is how easy-to-use it is.'
     },{
@@ -80,6 +81,7 @@
   &lt;button class="btn btn-success download-now"&gt;Download now&lt;/button&gt;
   &lt;script&gt;
   $('button.download-now').ab({
+    'name': 'button-experiment',
     'experiments':[{
       'value': function(element) {
         $(element).removeClass('btn-success').addClass('btn-primary');
