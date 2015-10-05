@@ -20,7 +20,19 @@
 	};
 
 	function setCookie(cname, cvalue, exdays) {
-		var fullValue = (readCookie(cname) ? readCookie(cname) + ',' : '') + cvalue;
+		cvalue = '' + cvalue;
+		var fullValue = readCookie(cname) || cvalue;
+		if (cvalue.indexOf('=') !== -1) {
+			var indexOfName = fullValue.indexOf(cvalue.split('=')[0]);
+			if (indexOfName === -1) {
+				fullValue += ',' + cvalue;
+			} else {
+				var endIndex = fullValue.indexOf(',', indexOfName);
+				if (endIndex == -1)
+					endIndex = fullValue.length;
+				fullValue = fullValue.replace(fullValue.substring(indexOfName, endIndex), cvalue);
+			}
+		}
 		var d = new Date();
 		d.setTime(d.getTime() + (exdays*24*60*60*1000));
 		var expires = "expires="+d.toUTCString();
