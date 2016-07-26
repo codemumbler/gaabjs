@@ -1,28 +1,30 @@
 {
-  "name": "ab",
-  "version": "1.0.0",
+  "name": "gaab.js",
+  "version": "1.1.1",
   "description": "GA-enabled AB testing Javascript Library",
-  "main": "ab.js",
+  "main": "gaab.js",
   "dependencies": {
-    "karma": "^0.12.36"
+    "karma": "^1.1.1"
   },
   "devDependencies": {
-    "jasmine-core": "^2.3.4",
-    "karma": "^0.12.36",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-jasmine": "^0.3.5"
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2"
   },
   "scripts": {
     "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codemumbler/ab.git"
+    "url": "https://github.com/codemumbler/gaabjs.git"
   },
   "author": "Steven Armstrong",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codemumbler/ab/issues"
+    "url": "https://github.com/codemumbler/gaabjs/issues"
   },
-  "homepage": "https://github.com/codemumbler/ab"
+  "homepage": "https://github.com/codemumbler/gaabjs"
 }
