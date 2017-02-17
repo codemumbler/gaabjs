@@ -3,7 +3,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'js/lib/*.js',
+      'http://code.jquery.com/jquery-3.1.1.min.js',
       'js/*.js',
       'test/lib/*.js',
       'test/**/*.Spec.js'
@@ -14,7 +14,7 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage'],
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.DEBUG,
     autoWatch: true,
     browsers: ['Firefox','Chrome'],
     singleRun: false

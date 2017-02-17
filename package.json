@@ -4,18 +4,18 @@
   "description": "GA-enabled AB testing Javascript Library",
   "main": "gaab.js",
   "dependencies": {
-    "karma": "^1.1.1"
+    "karma": "^1.4.1"
   },
   "devDependencies": {
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.1.1",
-    "karma-chrome-launcher": "^1.0.1",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
     "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2"
+    "karma-jasmine": "^1.1.0"
   },
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "karma start --single-run -browsers=Firefox"
   },
   "repository": {
     "type": "git",
